@@ -88,6 +88,8 @@ function SingleObj() {
             </table>
             {singleObj.seen_in.length > 0 &&
                 (<p> <i style={{color: "#239B56"}}>Stable</i> and available in Kube versions {prettyPrintVersions(singleObj.seen_in)}</p>)}
+            {singleObj.deprecated_in.length > 0 &&
+                (<p> <i style={{color: "#B03A2E"}}>Deprecated</i> but available in Kube versions {prettyPrintVersions(singleObj.deprecated_in)}</p>)}
             <table class="styled-table">
                 <caption>Fields</caption>
                 <thead>
@@ -111,8 +113,6 @@ function SingleObj() {
                 </tbody>
             </table>
             
-             {singleObj.deprecated_in.length > 0 &&
-                (<p> <i style={{color: "#B03A2E"}}>Deprecated</i> but available in Kube versions {prettyPrintVersions(singleObj.deprecated_in)}</p>)}
             {singleObj.fields.length > 0 &&
                 (<h3>Fields: </h3>)}
             {singleObj.fields.length > 0 &&
