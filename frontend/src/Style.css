@@ -1,10 +1,55 @@
+/* Style the tables */
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1em;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr,  .styled-table tfoot tr{
+    background-color: #496e67;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 5px 5px;
+    border-right: 1px solid #575252;
+}
+
+/* Prevent collapse of empty rows*/
+.styled-table td:empty::after{
+    content: "\00a0";
+}
+
+
+.styled-table tr .cl-yes {
+    background-color: #239B56;
+}
+
+.styled-table tr .cl-no {
+    background-color: #B03A2E;
+}
+
+/* .styled-table tbody tr {
+    border-bottom: 1px solid #575252;
+} */
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #9e9a9a;
+}
+/* 
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+} */
+
 /* Kindly provided by https://github.com/denysvitali/thebestmotherfuckingwebsite */
 body {
     font-family: Open Sans, Arial;
     color: #454545;
     font-size: 16px;
     margin: 2em auto;
-    max-width: 800px;
+    max-width: 900px;
     padding: 1em;
     line-height: 1.4;
     text-align: justify;
