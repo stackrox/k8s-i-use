@@ -1,4 +1,5 @@
 import './App.css';
+import './Style.css';
 import { allData } from "./allData";
 import {
   BrowserRouter as Router,
@@ -53,23 +54,41 @@ function SingleObj() {
             </>
         )
     }
+    const fields = singleObj.fields.map((item) => 
+        <li>{item.name}
+            <ul>
+                {item.seen_in.length > 0 &&
+                (<li><i style={{color: "#239B56"}}>Available</i> in versions: {prettyPrintVersions(item.seen_in)}</li>)}
+                {item.deprecated_in.length > 0 &&
+                (<li><i style={{color: "#B03A2E"}}>Deprecated</i> but available in versions: {prettyPrintVersions(item.deprecated_in)}</li>)}
+            </ul>
+        </li>);
     return (
         <>
+            <Link to={"/"}>Back to home page</Link>
             <h2> {prettyPrintObj(singleObj)} </h2>
             {singleObj.seen_in.length > 0 &&
-                (<p> Stable and available in Kube versions {prettyPrintVersions(singleObj.seen_in)}</p>)}
+                (<p> <i style={{color: "#239B56"}}>Stable</i> and available in Kube versions {prettyPrintVersions(singleObj.seen_in)}</p>)}
              {singleObj.deprecated_in.length > 0 &&
-                (<p> Deprecated but available in Kube versions {prettyPrintVersions(singleObj.deprecated_in)}</p>)}
+                (<p> <i style={{color: "#B03A2E"}}>Deprecated</i> but available in Kube versions {prettyPrintVersions(singleObj.deprecated_in)}</p>)}
+            {singleObj.fields.length > 0 &&
+                (<h3>Fields: </h3>)}
+            {singleObj.fields.length > 0 &&
+                (<ul>{fields}</ul>)}
+                
         </>
     );
 }
 
 function prettyPrintObj(obj) {
-    return `${obj.group}/${obj.version} ${obj.kind}`;
+    return `${obj.group}/${obj.version} - ${obj.kind}`;
 }
 
 function prettyPrintVersions(versions) {
-    return versions.map(version => `v1.${version}`).join(', ');
+    if (versions.length === 1) {
+        return `v1.${versions[0]}`;
+    }
+    return `v1.${versions[0]} - v1.${versions.slice(-1)[0]}`;
 }
 
 function constructLink(obj) {
