@@ -3,6 +3,7 @@ from typing import NamedTuple, Dict
 import sys
 import os
 
+
 def _validate_version(version: int):
     assert type(version) is int and version >= 6
 
@@ -62,10 +63,6 @@ def _process_fields_recursive(all_definitions: Dict, gvk: GVK, version: int, def
 
     for field_name, field_desc in all_definitions[definition_key].get("properties", {}).items():
         path_with_field_name = path_so_far + [field_name]
-
-        if len(path_so_far) > 50:
-            print(path_so_far, gvk, version, field_desc, definition_key)
-            assert False
 
         if field_desc.get("type") == "array":
             ref = field_desc["items"].get("$ref")
