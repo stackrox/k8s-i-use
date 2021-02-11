@@ -31,6 +31,11 @@
     background-color: #B03A2E;
 }
 
+.styled-table tr .cl-maybe {
+    background-color: #FFA500;
+}
+
+
 /* .styled-table tbody tr {
     border-bottom: 1px solid #575252;
 } */

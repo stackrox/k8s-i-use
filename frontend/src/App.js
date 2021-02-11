@@ -61,12 +61,12 @@ function SingleObj() {
                 {item.seen_in.length > 0 &&
                 (<li><i style={{color: "#239B56"}}>Available</i> in versions: {prettyPrintVersions(item.seen_in)}</li>)}
                 {item.deprecated_in.length > 0 &&
-                (<li><i style={{color: "#B03A2E"}}>Deprecated</i> but available in versions: {prettyPrintVersions(item.deprecated_in)}</li>)}
+                (<li><i style={{color: "#FFA500"}}>Deprecated</i> but available in versions: {prettyPrintVersions(item.deprecated_in)}</li>)}
             </ul>
         </li>);
 
-    const fieldRows = singleObj.fields.map((item) => constructructRow(item));
-    const kindRow = constructructRow(singleObj);
+    const fieldRows = singleObj.fields.map((item) => constructRow(item));
+    const kindRow = constructRow(singleObj);
 
     return (
         <>
@@ -89,7 +89,7 @@ function SingleObj() {
             {singleObj.seen_in.length > 0 &&
                 (<p> <i style={{color: "#239B56"}}>Stable</i> and available in Kube versions {prettyPrintVersions(singleObj.seen_in)}</p>)}
             {singleObj.deprecated_in.length > 0 &&
-                (<p> <i style={{color: "#B03A2E"}}>Deprecated</i> but available in Kube versions {prettyPrintVersions(singleObj.deprecated_in)}</p>)}
+                (<p> <i style={{color: "#FFA500"}}>Deprecated</i> but available in Kube versions {prettyPrintVersions(singleObj.deprecated_in)}</p>)}
             <table class="styled-table">
                 <caption>Fields</caption>
                 <thead>
@@ -132,12 +132,22 @@ function prettyPrintVersions(versions) {
     return `v1.${versions[0]} - v1.${versions.slice(-1)[0]}`;
 }
 
-function constructructRow(entry) {
-    var versions = [7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+function getClassNameWithColor(entry, version) {
+    if (entry.seen_in.includes(version)) {
+        return "cl-yes";
+    }
+    if (entry.deprecated_in.includes(version)) {
+        return "cl-maybe";
+    }
+    return "cl-no";
+}
+
+function constructRow(entry) {
+    const versions = [7,8,9,10,11,12,13,14,15,16,17,18,19,20];
     return <tr>
         <td>{entry.name}</td>
         {versions.map((version) => 
-            <td className={entry.seen_in.includes(version) ? "cl-yes":"cl-no"}></td> )}
+            <td className={getClassNameWithColor(entry, version)} /> )}
     </tr>
 }
 
