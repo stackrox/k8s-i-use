@@ -8,7 +8,7 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 
 
 function App() {
@@ -27,26 +27,40 @@ function App() {
 }
 
 function Home() {
-    const gvkLinks = allData.map(obj => {
-        const link = constructLink(obj);
-        return (
-            <p>
-            <Link key={link} to={`/${link}`}>{prettyPrintObj(obj)}</Link>
-            </p>
-        )
-    });
+    const [searchTerm, setSearchTerm] = useState("");
+    let editSearchTerm = (e) => {
+        setSearchTerm(e.target.value);
+    };
+    let dynamicSearch = () => {
+        return allData.filter(obj => obj.kind.toLowerCase().includes(searchTerm.toLowerCase())).map(obj => {
+            const link = constructLink(obj);
+            return (
+                <p key={"p-" + link}>
+                <Link key={link} to={`/${link}`}>{prettyPrintObj(obj)}</Link>
+                </p>
+            )
+        });
+    }
+    
     return (
         <>
             <h1>k8s-iuse</h1>
             <p>Click on the object of your choice to get started.</p>
-            {gvkLinks}
+            <input type="text" value = {searchTerm} onChange = {editSearchTerm} placeholder="Search for a kind!"/>
+            {dynamicSearch()}
         </>
     );
 }
 
 function SingleObj() {
+    const [searchTerm, setSearchTerm] = useState("");
     const { link } = useParams();
     const singleObj = allData.find(obj => constructLink(obj) === link);
+    let editSearchTerm = (e) => {
+        setSearchTerm(e.target.value);
+    };
+    let dynamicSearch = () => {
+        return singleObj.fields.filter(obj => obj.name.toLowerCase().includes(searchTerm.toLowerCase())).map((obj) => constructRow(obj));}
     if (!singleObj) {
         return (
             <>
@@ -65,7 +79,6 @@ function SingleObj() {
             </ul>
         </li>);
 
-    const fieldRows = singleObj.fields.map((item) => constructRow(item));
     const kindRow = constructRow(singleObj);
 
     return (
@@ -73,7 +86,7 @@ function SingleObj() {
             <Link to={"/"}>Back to home page</Link>
             <h2> {prettyPrintObj(singleObj)} </h2>
             
-            <table class="styled-table">
+            <table className="styled-table">
                 <thead>
                     <tr>
                         <th></th>
@@ -90,7 +103,8 @@ function SingleObj() {
                 (<p> <i style={{color: "#239B56"}}>Stable</i> and available in Kube versions {prettyPrintVersions(singleObj.seen_in)}</p>)}
             {singleObj.deprecated_in.length > 0 &&
                 (<p> <i style={{color: "#FFA500"}}>Deprecated</i> but available in Kube versions {prettyPrintVersions(singleObj.deprecated_in)}</p>)}
-            <table class="styled-table">
+            <input type="text" value = {searchTerm} onChange = {editSearchTerm} placeholder="Search for a field!"/>
+            <table className="styled-table">
                 <caption>Fields</caption>
                 <thead>
                     <tr>
@@ -109,7 +123,7 @@ function SingleObj() {
                     </tr>
                 </tfoot>
                 <tbody>
-                    {fieldRows}
+                    {dynamicSearch()}
                 </tbody>
             </table>
             
