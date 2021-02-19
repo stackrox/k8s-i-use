@@ -1,20 +1,19 @@
 # hackathon-k8s-api
 
-To generate gvks_by_version, run:  
-`go run ./cmd/apidiffgen swaggers > gvks_by_version.json`
+## Data preparation
+Everything starts with the Kubernetes OpenAPI schemas.  
+These are downloaded for every version from v1.7 to latest.  
+Afterwards, the GVKs are being extracted and version info is parsed, in which versions each GVK is available / deprecated.  
+All of this can be done by running 
+```
+python3 gather_and_prepare_data.py
+```  
+This script also saves the parsed structure as a valid `JS` file in the frontend,  
+where it can be used as `allData` variable after importing it.
 
 
-To generate diffs, run:  
-`python3 generate_changes.py`  
-The script expects `gvks_by_version.json` to be available in the same folder.  
-As a result, `diffs.json` will be created.  
-It contains the key of the diffed target version with two lists: `added` and `removed`:
-```
-...
-"swagger_v1.20.json":  {
-    "added": [ ... ],
-    "removed": [ ... ]
-},
-...
-```
-This can be read as: "From version 1.19 to 1.20, these items were added and removed".
+## Frontend
+The frontend is based on React and can be found in the `frontend` folder.  
+You will need yarn installed for this to work.  
+Start by installing dependencies with `yarn install`.  
+The dev server is started by calling `yarn start`.  

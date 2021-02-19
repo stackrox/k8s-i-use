@@ -87,6 +87,7 @@ def _process_fields_recursive(all_definitions: Dict, gvk: GVK, version: int, def
 
 
 def parse_swagger_file(path: str, all_gvks: Dict[GVK, GVKWithVersions], all_fields: Dict[FieldKey, Field]):
+    print(f"Parsing {path}...")
     with open(path, 'r') as f:
         swagger_loaded = json.load(f)
 
@@ -113,7 +114,7 @@ def parse_swagger_file(path: str, all_gvks: Dict[GVK, GVKWithVersions], all_fiel
             _process_fields_recursive(swagger_loaded['definitions'], gvk, version, key, all_fields)
 
 
-def parse_files(dir):
+def parse_files(dir, all_data_path):
     all_gvks: Dict[GVK, GVKWithVersions] = {}
     all_fields: Dict[FieldKey, Field] = {}
     for filename in os.listdir(dir):
@@ -137,9 +138,17 @@ def parse_files(dir):
                 })
 
         giant_json.append(curr)
+    
+    # write to frontend dir to be picked up by the React app
+    # a bit hacky but produces a valid JS data structure
+    all_data = os.path.join(all_data_path, "allData.js")
+    with open(all_data, "w") as out_ad:
+        print("Writing GVK info to frontend datastructure")
+        out_ad.write("export const allData = ")
+        json.dump(giant_json, out_ad)
+        out_ad.write(";")
+
+    # write to clean json - e.g. for further processing
     with open("gvk_metadata.json", "w") as out_f:
+        print("Writing GVK info to json")
         json.dump(giant_json, out_f)
-
-
-if __name__ == "__main__":
-    parse_files(sys.argv[1])

@@ -69,15 +69,6 @@ function SingleObj() {
             </>
         )
     }
-    const fields = singleObj.fields.map((item) => 
-        <li key={item.name}>{item.name}
-            <ul>
-                {item.seen_in.length > 0 &&
-                (<li><i style={{color: "#239B56"}}>Available</i> in versions: {prettyPrintVersions(item.seen_in)}</li>)}
-                {item.deprecated_in.length > 0 &&
-                (<li><i style={{color: "#FFA500"}}>Deprecated</i> but available in versions: {prettyPrintVersions(item.deprecated_in)}</li>)}
-            </ul>
-        </li>);
 
     const kindRow = constructRow(singleObj);
 
@@ -126,11 +117,6 @@ function SingleObj() {
                     {dynamicSearch()}
                 </tbody>
             </table>
-            
-            {singleObj.fields.length > 0 &&
-                (<h3>Fields: </h3>)}
-            {singleObj.fields.length > 0 &&
-                (<ul>{fields}</ul>)}
         </>
     );
 }
@@ -158,10 +144,10 @@ function getClassNameWithColor(entry, version) {
 
 function constructRow(entry) {
     const versions = [7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-    return <tr>
-        <td>{entry.name}</td>
-        {versions.map((version) => 
-            <td className={getClassNameWithColor(entry, version)} /> )}
+    return <tr key={"tr-" + entry.name}>
+        <td key={"td-" + entry.name}>{entry.name}</td>
+        {versions.map((version, index) => 
+            <td key={"td-" + version} className={getClassNameWithColor(entry, version)} /> )}
     </tr>
 }
 
