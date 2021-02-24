@@ -1,4 +1,5 @@
-# hackathon-k8s-api
+# k8s-i-use
+This is the source for https://k8siuse.com.
 
 ## Data preparation
 Everything starts with the Kubernetes OpenAPI schemas.  
@@ -14,6 +15,12 @@ where it can be used as `allData` variable after importing it.
 
 ## Frontend
 The frontend is based on React and can be found in the `frontend` folder.  
-You will need yarn installed for this to work.  
+You will need yarn & npm installed for this to work.  
 Start by installing dependencies with `yarn install`.  
 The dev server is started by calling `yarn start`.  
+
+
+## Deployment
+Deployment is done via `yarn deploy`, which creates/updates an optimized production build
+that is pushed to the branch *gh-pages*.
+**Warning**: The production build can take quite some time to build.
