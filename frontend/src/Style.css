@@ -6,11 +6,21 @@
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
+
+/* Sticky table header*/
+.styled-table th {
+    position: sticky;
+    top: 0;
+    background-color: #496e67;
+    color: #ffffff;
+}
+
 .styled-table thead tr,  .styled-table tfoot tr{
     background-color: #496e67;
     color: #ffffff;
     text-align: left;
 }
+
 .styled-table th,
 .styled-table td {
     padding: 5px 5px;
