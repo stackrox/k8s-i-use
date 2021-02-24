@@ -22,5 +22,9 @@ The dev server is started by calling `yarn start`.
 
 ## Deployment
 Deployment is done via `yarn deploy`, which creates/updates an optimized production build
-that is pushed to the branch *gh-pages*.
-**Warning**: The production build can take quite some time to build.
+that is pushed to the branch *gh-pages*.  
+**Warning**: The production build can take quite some time to build.  
+
+### Domain Config
+For external domains, GitHub Pages expects a `CNAME` file with the domain name in the root of the repo.  
+If we ever want to change the domain, this file can be found in `frontend/public/CNAME`.
