@@ -83,7 +83,7 @@ function SingleObj() {
                         <th></th>
                         <th>1.7</th><th>1.8</th><th>1.9</th><th>1.10</th><th>1.11</th><th>1.12</th>
                         <th>1.13</th><th>1.14</th><th>1.15</th><th>1.16</th><th>1.17</th><th>1.18</th>
-                        <th>1.19</th><th>1.20</th>
+                        <th>1.19</th><th>1.20</th><th>1.21</th><th>1.22</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,7 +102,7 @@ function SingleObj() {
                     <th>Field Name</th>
                         <th>1.7</th><th>1.8</th><th>1.9</th><th>1.10</th><th>1.11</th><th>1.12</th>
                         <th>1.13</th><th>1.14</th><th>1.15</th><th>1.16</th><th>1.17</th><th>1.18</th>
-                        <th>1.19</th><th>1.20</th>
+                        <th>1.19</th><th>1.20</th><th>1.21</th><th>1.22</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -110,7 +110,7 @@ function SingleObj() {
                     <th>Field Name</th>
                         <th>1.7</th><th>1.8</th><th>1.9</th><th>1.10</th><th>1.11</th><th>1.12</th>
                         <th>1.13</th><th>1.14</th><th>1.15</th><th>1.16</th><th>1.17</th><th>1.18</th>
-                        <th>1.19</th><th>1.20</th>
+                        <th>1.19</th><th>1.20</th><th>1.21</th><th>1.22</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -143,7 +143,7 @@ function getClassNameWithColor(entry, version) {
 }
 
 function constructRow(entry) {
-    const versions = [7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+    const versions = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
     return <tr key={"tr-" + entry.name}>
         <td key={"td-" + entry.name}>{entry.name}</td>
         {versions.map((version, index) => 
