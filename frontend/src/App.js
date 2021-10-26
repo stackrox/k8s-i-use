@@ -13,7 +13,7 @@ import React, { useState } from "react";
 
 function App() {
   return (
-      <Router>
+      <Router basename="/k8s-i-use">
       <Switch>
           <Route path="/:link">
               <SingleObj />
