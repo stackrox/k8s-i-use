@@ -1,5 +1,5 @@
 # k8s-i-use
-This is the source for https://k8siuse.com.
+This is the source for ~~https://k8siuse.com~~ https://stackrox.github.io/k8s-i-use/ (temporary, while we iron out some DNS issues).
 
 ## Data preparation
 Everything starts with the Kubernetes OpenAPI schemas.  
