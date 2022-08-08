@@ -41,13 +41,15 @@ function Home() {
             )
         });
     }
-    
+
     return (
         <>
             <h1>k8s-iuse</h1>
-            <p>Click on the object of your choice to get started.</p>
-            <input type="text" value = {searchTerm} onChange = {editSearchTerm} placeholder="Search for a kind!"/>
-            {dynamicSearch()}
+            <div class="kind-results">
+                <p>Click on the object of your choice to get started.</p>
+                <input type="text" value = {searchTerm} onChange = {editSearchTerm} class="search-bar" placeholder="Search for a kind!"/>
+                {dynamicSearch()}
+            </div>
         </>
     );
 }
@@ -76,7 +78,7 @@ function SingleObj() {
         <>
             <Link to={"/"}>Back to home page</Link>
             <h2> {prettyPrintObj(singleObj)} </h2>
-            
+
             <table className="styled-table">
                 <thead>
                     <tr>
@@ -90,11 +92,13 @@ function SingleObj() {
                     {kindRow}
                 </tbody>
             </table>
+            <div class="field-results">
             {singleObj.seen_in.length > 0 &&
                 (<p> <i style={{color: "#239B56"}}>Stable</i> and available in Kube versions {prettyPrintVersions(singleObj.seen_in)}</p>)}
             {singleObj.deprecated_in.length > 0 &&
                 (<p> <i style={{color: "#FFA500"}}>Deprecated</i> but available in Kube versions {prettyPrintVersions(singleObj.deprecated_in)}</p>)}
-            <input type="text" value = {searchTerm} onChange = {editSearchTerm} placeholder="Search for a field!"/>
+            <input type="text" value = {searchTerm} onChange = {editSearchTerm} class="search-bar" placeholder="Search for a field!"/>
+            </div>
             <table className="styled-table">
                 <caption>Fields</caption>
                 <thead>
@@ -146,7 +150,7 @@ function constructRow(entry) {
     const versions = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
     return <tr key={"tr-" + entry.name}>
         <td key={"td-" + entry.name}>{entry.name}</td>
-        {versions.map((version, index) => 
+        {versions.map((version, index) =>
             <td key={"td-" + version} className={getClassNameWithColor(entry, version)} /> )}
     </tr>
 }
@@ -167,7 +171,7 @@ function createControls() {
       contrastButton.classList.add('cont-inv');
       contrastButton.innerText = stringArray[0];
       contrastButton.tabIndex = 1;
-  
+
     var nightModeButton = document.createElement('button');
       nightModeButton.id = "invmode";
       nightModeButton.classList.add('cont-inv');
@@ -192,7 +196,7 @@ function createControls() {
       false
     );
   }
-  
+
   function addContrastControl() {
     someControl(
       "contrast",
@@ -200,11 +204,11 @@ function createControls() {
       "contrast"
     );
   }
-  
+
   function addInvertedControl() {
     someControl("invmode", [stringArray[2], stringArray[3]], "inverted");
   }
-  
+
   createControls();
   addContrastControl();
   addInvertedControl();

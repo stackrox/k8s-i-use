@@ -1,7 +1,23 @@
+/* Main search result container */
+.kind-results {
+    margin: 0 auto 0 auto;
+    width: 600px;
+}
+
+.search-bar {
+    width: 300px;
+}
+
+/* Field result styling */
+.field-results {
+    margin: 0 auto 0 auto;
+    width: 600px;
+}
+
 /* Style the tables */
 .styled-table {
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 25px auto 0 auto;
     font-size: 1em;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -53,7 +69,7 @@
 .styled-table tbody tr:nth-of-type(even) {
     background-color: #9e9a9a;
 }
-/* 
+/*
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 } */
@@ -64,7 +80,7 @@ body {
     color: #454545;
     font-size: 16px;
     margin: 2em auto;
-    max-width: 900px;
+    /* max-width: 900px; */
     padding: 1em;
     line-height: 1.4;
     text-align: justify;
@@ -217,6 +233,10 @@ html.contrast span.mfw {
     html.inverted html {
         background-color: #fefefe
     }
+}
+
+h1, h2 {
+    text-align: center;
 }
 
 a {
